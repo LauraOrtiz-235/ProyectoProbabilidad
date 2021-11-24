@@ -148,6 +148,112 @@ table(data[,"franja"])
 barplot(table(data[,"franja"]))
 boxplot(hours(hours))
 
+data[,"Hora_de_hora"] <- ifelse(hours(hours)<=0,0,
+                               ifelse(hours(hours)<=1,1,
+                                      ifelse(hours(hours)<=2,2,
+                                             ifelse(hours(hours)<=3,3,
+                                                    ifelse(hours(hours)<=4,4,
+                                                           ifelse(hours(hours)<=5,5,
+                                                                  ifelse(hours(hours)<=6,6,
+                                                                         ifelse(hours(hours)<=7,7,
+                                                                                ifelse(hours(hours)<=8,8,
+                                                                                       ifelse(hours(hours)<=9,9,
+                                                                                              ifelse(hours(hours)<=10,10,
+                                                                                                     ifelse(hours(hours)<=11,11,
+                                                                                                            ifelse(hours(hours)<=12,12,
+                                                                                                                   ifelse(hours(hours)<=13,13,
+                                                                                                                          ifelse(hours(hours)<=14,14,
+                                                                                                                                 ifelse(hours(hours)<=15,15,
+                                                                                                                                        ifelse(hours(hours)<=16,16,
+                                                                                                                                               ifelse(hours(hours)<=17,17,
+                                                                                                                                                      ifelse(hours(hours)<=18,18,
+                                                                                                                                                             ifelse(hours(hours)<=19,19,
+                                                                                                                                                                    ifelse(hours(hours)<=20,20,
+                                                                                                                                                                           ifelse(hours(hours)<=21,21,
+                                                                                                                                                                                  ifelse(hours(hours)<=22,22,
+                                                                                                                                                                                         ifelse(hours(hours)<=23,23,24))))))))))))))))))))))))
+
+
+media_hora <- mean(as.integer(hours(hours)),na.rm = TRUE)
+mediana_hora <- median(as.numeric(hours(hours)),na.rm = TRUE)
+dev_est_hora <- sd(as.numeric(hours(hours)),na.rm = TRUE)
+varianza_hora <- var(data[,5], na.rm = FALSE)
+
+area_t<-function(x=0,gl){
+  t<-seq(-4,4,0.01)
+  fdp<-dt(t,gl)
+  plot(t,fdp,type="l")
+  polygon(c(t[t>=x],x),c(fdp[t>=x],fdp[t==4]),col="blue")
+}
+
+t.test(data[,"Edad"],alternative = "less",mu=40)
+
+area_t(1.3807,472)
+
+t.test(data[,"Hora_de_hora"],alternative = "less",mu=12)
+
+t.test(data[,"id_del_vehiculo"])
+
+area_t(-8.15,472)
+
+
+regresion <- lm(data[,"Hora_de_hora"]~data[,"Edad"])
+summary(regresion)
+plot(data[,"Edad"],data[,"Hora_de_hora"],xlab="Edad",ylab="Hora")
+abline(regresion)
+
+
+table(data[,3])
+data[,"id_de_accidente"] <- ifelse(data[,3] == "CaÃ­da de Ocupante",1,
+                              ifelse(data[,3] == "Ciclista Atropellado",2,
+                                 ifelse(data[,3] == "ColisiÃ³n ",3,
+                                        ifelse(data[,3]=="ColisiÃ³n con animales",4,
+                                               ifelse(data[,3] == "ColisiÃ³n con objeto fijo",5,
+                                                      ifelse(data[,3] == "ColisiÃ³n con Objeto Fijo",5,
+                                                             ifelse(data[,3] == "ColisiÃ³n con objeto mÃ³vil",6,
+                                                                    ifelse(data[,3] == "ColisiÃ³n con Objeto MÃ³vil",6,
+                                                                           ifelse(data[,3] == "ColisiÃ³n con objeto movil",6,
+                                                                                  ifelse(data[,3] == "Otra Clase de Accidente",7,
+                                                                                         ifelse(data[,3] == "PeatÃ³n Atropellado",8,
+                                                                                                ifelse(data[,3] == "Sin Dato",9,10))))))))))))
+table(data[,7])
+data[,"id_del_vehiculo"] <- ifelse(data[,7] == "AutÃ³nomo (PeatÃ³n)",1,
+                                   ifelse(data[,7] == "Bicicleta",2,
+                                          ifelse(data[,7] == "CamiÃ³n/Camioneta",3,
+                                                 ifelse(data[,7]=="Lancha/otro",4,
+                                                        ifelse(data[,7] == "Microbus/BusetÃ³n",5,
+                                                               ifelse(data[,7] == "Motocicleta",6,
+                                                                      ifelse(data[,7] == "No aplica",7,
+                                                                             ifelse(data[,7] == "Sin dato",8,
+                                                                                    ifelse(data[,7] == "Taxi",9,10)))))))))
+
+regresion <- lm(data[,"id_de_accidente"]~data[,"Edad"])
+summary(regresion)
+plot(data[,"Edad"],data[,"id_de_accidente"],xlab="Edad",ylab="id_accidente")
+abline(regresion)
+
+regresion <- lm(data[,"id_del_vehiculo"]~data[,"Edad"])
+summary(regresion)
+plot(data[,"Edad"],data[,"id_del_vehiculo"],xlab="Edad",ylab="id_vehiculo")
+abline(regresion)
+
+regresion <- lm(data[,"id_del_vehiculo"]~data[,"Hora_de_hora"])
+summary(regresion)
+plot(data[,"Hora_de_hora"],data[,"id_del_vehiculo"],xlab="Edad",ylab="id_vehiculo")
+abline(regresion)
+
+regresion <- lm(data[,"id_de_accidente"]~data[,"Hora_de_hora"])
+summary(regresion)
+plot(data[,"Hora_de_hora"],data[,"id_de_accidente"],xlab="Edad",ylab="id_vehiculo")
+abline(regresion)
+
+regresion <- lm(data[,"Hora_de_hora"]~data[,"Edad"])
+summary(regresion)
+plot(data[,"Edad"],data[,"Hora_de_hora"],xlab="Edad",ylab="id_vehiculo")
+abline(regresion)
+
+
+
 #################################esto de abajo esta choneto pero lo dejo 
 #################################para que vean que en 11 lineas sale todo lo de abajo
 # count <- 1
